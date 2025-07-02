@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("hello-java-image")
+                    sh 'docker build -t hello-java-image .'
                 }
             }
         }
@@ -19,9 +19,10 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    dockerImage.run()
+                    sh 'docker run --rm hello-java-image'
                 }
             }
         }
     }
 }
+
